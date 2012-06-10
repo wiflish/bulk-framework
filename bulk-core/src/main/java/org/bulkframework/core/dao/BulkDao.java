@@ -19,7 +19,7 @@ public interface BulkDao<T> {
      * @param model 待写入的对象.
      * @return 返回记录id.
      */
-    public int insertAndReturnId(String sql, T model);
+    public T insertAndReturnId(String sql, T model);
 
     /**
      * 插入记录并返回已插入成功的记录条数.
@@ -49,7 +49,10 @@ public interface BulkDao<T> {
     public int updateByMap(String sql, Map<String, Object> paramMap);
 
     /**
-     * 逻辑删除记录,设置domain对象的status属性为-1.
+     * 逻辑删除记录,设置domain对象的status属性为-1.如：
+     * <p>
+     * update table_a set status = -1,update_time=now() where id=#{id}
+     * </p>
      * 
      * @param sql 实际的sql语句或者能映射到实际的sql语句.
      * @param id 主键id.
@@ -58,7 +61,10 @@ public interface BulkDao<T> {
     public int remove(String sql, long id);
 
     /**
-     * 逻辑删除记录,设置domain对象的status属性为-1.
+     * 逻辑删除记录,设置domain对象的status属性为-1.如：
+     * <p>
+     * update table_a set status = -1,update_time=now() where id=#{id}
+     * </p>
      * 
      * @param sql 实际的sql语句或者能映射到实际的sql语句.
      * @param id 主键id.
@@ -68,6 +74,9 @@ public interface BulkDao<T> {
 
     /**
      * 根据条件逻辑删除记录,设置domain对象的status属性为-1.
+     * <p>
+     * update table_a set status = -1,update_time=now() where queryMap.key=#{queryMap.value} and ...
+     * </p>
      * 
      * @param sql 实际的sql语句或者能映射到实际的sql语句.
      * @param queryMap 查询条件
@@ -77,6 +86,9 @@ public interface BulkDao<T> {
 
     /**
      * 查询总记录数.
+     * <p>
+     * select count(*) from table_a where queryMap.key=#{queryMap.value} and ...
+     * </p>
      * 
      * @param sql 实际的sql语句或者能映射到实际的sql语句.
      * @param queryMap 查询参数.
@@ -85,7 +97,7 @@ public interface BulkDao<T> {
     public int queryCount(String sql, Map<String, Object> queryMap);
 
     /**
-     * 根据条件查询列表（分页）.
+     * 根据条件查询列表（分页），不查询总记录数.
      * 
      * @param sql 实际的sql语句或者能映射到实际的sql语句.
      * @param queryMap
@@ -93,6 +105,17 @@ public interface BulkDao<T> {
      * @return
      */
     public Pager<T> queryPagedList(String sql, Map<String, Object> queryMap, Pager<T> pager);
+
+    /**
+     * 根据条件查询列表（分页），返回分页列表数据和总记录数.
+     * 
+     * @param countSql 总记录数查询sql.
+     * @param pageSql 分页查询sql.
+     * @param queryMap
+     * @param pager
+     * @return
+     */
+    public Pager<T> queryPagedList(String countSql, String pageSql, Map<String, Object> queryMap, Pager<T> pager);
 
     /**
      * 查询所有记录.用于字典类/枚举类数据.
@@ -147,16 +170,6 @@ public interface BulkDao<T> {
      * @return 返回符合条件的记录
      */
     public T queryOne(String sql, Map<String, Object> queryMap);
-
-    /**
-     * 根据条件查询一条记录.如果根据条件返回多条记录，抛出异常{@link NotUniqueRecordException }.
-     * 
-     * @param sql 实际的sql语句或者能映射到实际的sql语句.
-     * @param queryMap 查询参数.
-     * @param multiException true=查询返回多条记录时抛出异常{@link NotUniqueRecordException };false=返回第一条记录.
-     * @return 返回符合条件的记录
-     */
-    public T queryOne(String sql, Map<String, Object> queryMap, boolean multiException);
 
     /**
      * 根据id查询一条记录.
