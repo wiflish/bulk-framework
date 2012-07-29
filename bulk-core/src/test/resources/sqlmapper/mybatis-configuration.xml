@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <typeAlias alias="Activity" type="com.aicai.vip.common.domain.Activity"/>
+        <typeAlias alias="Degree"   type="com.aicai.vip.common.domain.Degree"/>
+        <typeAlias alias="JmsReceiveLog" type="com.aicai.vip.common.domain.JmsReceiveLog"/>
+        <typeAlias alias="Mission" type="com.aicai.vip.common.domain.Mission"/>
+        <typeAlias alias="MissionExamTopic" type="com.aicai.vip.common.domain.MissionExamTopic"/>
+        <typeAlias alias="Prerogative" type="com.aicai.vip.common.domain.Prerogative"/>
+        <typeAlias alias="VipDegreeUpdownLog" type="com.aicai.vip.common.domain.VipDegreeUpdownLog"/>
+        <typeAlias alias="VipMission" type="com.aicai.vip.common.domain.VipMission"/>
+        <typeAlias alias="VipPrerogative" type="com.aicai.vip.common.domain.VipPrerogative"/>
+        <typeAlias alias="VipWealthLog" type="com.aicai.vip.common.domain.VipWealthLog"/>
+        <typeAlias alias="CmsContent" type="com.aicai.vip.common.domain.CmsContent"/>
+        <typeAlias alias="VipMemberUserDegree" type="com.aicai.vip.common.domain.VipMemberUserDegree"/>
+        <typeAlias alias="VipUser" type="com.aicai.vip.common.domain.VipUser"/>
+        <typeAlias alias="BetfollowTemp" type="com.aicai.vip.common.domain.BetfollowTemp"/>
+        
+        <typeAlias alias="Calendar" type="java.util.Calendar" />
+    </typeAliases>
+
+    <typeHandlers>
+        <typeHandler handler="com.aicai.dao.mybatis.typehandler.CalendarTypeHandler"
+            javaType="java.util.Calendar" />
+    </typeHandlers>
+</configuration>
