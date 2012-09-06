@@ -8,8 +8,14 @@ import java.sql.SQLException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.bulkframework.common.model.DefaultFeatureJson;
+import org.apache.ibatis.type.MappedJdbcTypes;
+import org.apache.ibatis.type.MappedTypes;
 import org.bulkframework.common.model.FeatureJson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 
 /**
  * 扩展字段类型处理.
@@ -17,50 +23,58 @@ import org.bulkframework.common.model.FeatureJson;
  * @author wiflish
  * @createTime 2012-6-7 下午10:15:49
  */
-public class FeatureJsonTypeHandler extends BaseTypeHandler<FeatureJson> {
-    @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, FeatureJson parameter, JdbcType jdbcType) throws SQLException {
-        ps.setString(i, parameter.getFeatureJson());
+@MappedTypes({ FeatureJson.class })
+@MappedJdbcTypes({ JdbcType.VARCHAR })
+public class FeatureJsonTypeHandler<T extends FeatureJson> extends BaseTypeHandler<T> {
+    private static final Logger logger = LoggerFactory.getLogger(FeatureJsonTypeHandler.class);
+
+    private Class<T> type;
+
+    public FeatureJsonTypeHandler(Class<T> type) {
+        this.type = type;
     }
 
     @Override
-    public FeatureJson getNullableResult(ResultSet rs, String columnName) throws SQLException {
+    public void setNonNullParameter(PreparedStatement ps, int i, T parameter, JdbcType jdbcType) throws SQLException {
+        ps.setString(i, parameter.toJSONString());
+    }
+
+    @Override
+    public T getNullableResult(ResultSet rs, String columnName) throws SQLException {
         String json = rs.getString(columnName);
 
-        if (StringUtils.isNotBlank(json)) {
-            FeatureJson featureJson = new DefaultFeatureJson();
-
-            featureJson.setFeatureJson(json);
-
-            return featureJson;
-        }
-        return null;
+        return parseStringToBaseFeatureJson(json);
     }
 
     @Override
-    public FeatureJson getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+    public T getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         String json = rs.getString(columnIndex);
 
-        if (StringUtils.isNotBlank(json)) {
-            FeatureJson featureJson = new DefaultFeatureJson();
-
-            featureJson.setFeatureJson(json);
-
-            return featureJson;
-        }
-        return null;
+        return parseStringToBaseFeatureJson(json);
     }
 
     @Override
-    public FeatureJson getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+    public T getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         String json = cs.getString(columnIndex);
 
+        return parseStringToBaseFeatureJson(json);
+    }
+
+    /**
+     * 将String类型转换为BaseFeatureJson对象.
+     * 
+     * @param json
+     * @return
+     */
+    private T parseStringToBaseFeatureJson(String json) {
         if (StringUtils.isNotBlank(json)) {
-            FeatureJson featureJson = new DefaultFeatureJson();
-
-            featureJson.setFeatureJson(json);
-
-            return featureJson;
+            try {
+                T model = JSON.parseObject(json, type);
+                return model;
+            } catch (JSONException ex) {
+                logger.warn("字符串转换为[{}]失败，参数：[{}]", type, json);
+                return null;
+            }
         }
         return null;
     }

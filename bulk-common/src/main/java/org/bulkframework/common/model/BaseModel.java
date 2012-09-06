@@ -9,7 +9,7 @@ import java.util.Calendar;
  * @author wiflish
  * @createTime 2012-6-3 下午11:55:24
  */
-public abstract class BaseModel implements Serializable {
+public abstract class BaseModel<F extends FeatureJson> implements Serializable {
     private static final long serialVersionUID = 6742295437488171192L;
 
     /** 记录主键id */
@@ -24,9 +24,57 @@ public abstract class BaseModel implements Serializable {
     /** 记录更新时间. */
     protected Calendar updateTime;
 
-    /** 扩展字段，保存字符串或带类型的数据，长度：1024，Json结构. */
-    protected FeatureJson featureJson;
+    /** 扩展字段，保存数值型数据，定义数值区间为一个字段，如：[200-300]. */
+    protected Long featureNum;
 
-    /** 扩展字段，保存数值型数据，位操作. */
-    protected Long featureBit;
+    /** 扩展字段，Json结构. 长度限制为255以内. */
+    private F featureJson;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    public Calendar getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Calendar createTime) {
+        this.createTime = createTime;
+    }
+
+    public Calendar getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Calendar updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Long getFeatureNum() {
+        return featureNum;
+    }
+
+    public void setFeatureNum(Long featureNum) {
+        this.featureNum = featureNum;
+    }
+
+    public F getFeatureJson() {
+        return featureJson;
+    }
+
+    public void setFeatureJson(F featureJson) {
+        this.featureJson = featureJson;
+    }
 }

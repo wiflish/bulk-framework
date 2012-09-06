@@ -2,12 +2,11 @@ package org.bulkframework.core.domain.typehandler;
 
 import org.bulkframework.common.model.BaseModel;
 
-public class User extends BaseModel {
+public class User extends BaseModel<UserFeatureJson> {
     private static final long serialVersionUID = 5945595186897644723L;
 
     private String username;
     private String password;
-    private UserFeatureJson featureJson;
 
     public String getUsername() {
         return username;
@@ -23,13 +22,5 @@ public class User extends BaseModel {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public UserFeatureJson getFeatureJson() {
-        return featureJson;
-    }
-
-    public void setFeatureJson(UserFeatureJson featureJson) {
-        this.featureJson = featureJson;
     }
 }

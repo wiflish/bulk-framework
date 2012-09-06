@@ -68,7 +68,7 @@ public class BulkMybatisDao<T> implements BulkDao<T> {
 
     @Override
     public int queryCount(String sql, Map<String, Object> queryMap) {
-        return sqlSessionTemplate.selectOne(sql, queryMap);
+        return (Integer) sqlSessionTemplate.selectOne(sql, queryMap);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class BulkMybatisDao<T> implements BulkDao<T> {
         }
 
         // 总记录数.
-        int count = sqlSessionTemplate.selectOne(countSql, queryMap);
+        int count = this.queryCount(countSql, queryMap);
         pager.setTotalCount(count);
 
         // 设置分页参数.

@@ -3,6 +3,7 @@ package org.bulkframework.common;
 import java.io.Serializable;
 
 /**
+ * 常量定义.
  * 
  * @author wiflish
  * @createTime 2012-6-7 下午11:13:45
