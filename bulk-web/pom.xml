@@ -7,6 +7,7 @@
 		<groupId>org.bulkframework</groupId>
 		<artifactId>bulk-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+        <relativePath>../bulk-parent/</relativePath>
 	</parent>
 	<artifactId>bulk-web</artifactId>
 	<name>bulk-web</name>
