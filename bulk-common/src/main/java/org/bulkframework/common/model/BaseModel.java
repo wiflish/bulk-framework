@@ -1,3 +1,18 @@
+/**
+ * Copyright 2011-2012 [wiflish.xie@gmail.com].
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.bulkframework.common.model;
 
 import java.io.Serializable;
@@ -24,8 +39,8 @@ public abstract class BaseModel<F extends FeatureJson> implements Serializable {
     /** 记录更新时间. */
     protected Calendar updateTime;
 
-    /** 扩展字段，保存数值型数据，定义数值区间为一个字段，如：[200-300]. */
-    protected Long featureNum;
+    /** 扩展字段，保存标识数据，按位操作，具体的位的业务含义由各个业务表自行定义. */
+    protected FeatureBit featureBit;
 
     /** 扩展字段，Json结构. 长度限制为255以内. */
     private F featureJson;
@@ -62,12 +77,12 @@ public abstract class BaseModel<F extends FeatureJson> implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Long getFeatureNum() {
-        return featureNum;
+    public FeatureBit getFeatureBit() {
+        return featureBit;
     }
 
-    public void setFeatureNum(Long featureNum) {
-        this.featureNum = featureNum;
+    public void setFeatureBit(FeatureBit featureBit) {
+        this.featureBit = featureBit;
     }
 
     public F getFeatureJson() {

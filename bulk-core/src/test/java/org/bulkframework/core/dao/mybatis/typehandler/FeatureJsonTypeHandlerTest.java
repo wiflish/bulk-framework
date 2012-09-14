@@ -4,16 +4,14 @@ import static org.junit.Assert.*;
 
 import java.util.Calendar;
 
+import org.bulkframework.core.dao.AbstractBulkCoreSpringContextTest;
 import org.bulkframework.core.dao.BulkDao;
 import org.bulkframework.core.domain.typehandler.User;
 import org.bulkframework.core.domain.typehandler.UserFeatureJson;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-@ContextConfiguration("classpath:/bulkCoreConfig/spring-bulkcore.xml")
-public class FeatureJsonTypeHandlerTest extends AbstractJUnit4SpringContextTests {
+public class FeatureJsonTypeHandlerTest extends AbstractBulkCoreSpringContextTest {
     @Autowired
     private BulkDao<User> userDao;
 

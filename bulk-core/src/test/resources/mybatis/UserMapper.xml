@@ -8,11 +8,11 @@
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="feature_json" property="featureJson" jdbcType="VARCHAR" />
-    <result column="feature_num" property="featureNum" jdbcType="BIGINT" />
+    <result column="feature_bit" property="featureBit" jdbcType="BIGINT" />
     <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, update_time, create_time, username, password, feature_json, feature_num, status
+    id, update_time, create_time, username, password, feature_json, feature_bit, status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,10 +27,10 @@
   <insert id="insert" parameterType="org.bulkframework.core.domain.typehandler.User" >
     insert into t_user (id, update_time, create_time, 
       username, password, feature_json, 
-      feature_num, status)
+      feature_bit, status)
     values (#{id,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{featureJson,jdbcType=VARCHAR}, 
-      #{featureNum,jdbcType=BIGINT}, #{status,jdbcType=TINYINT})
+      #{featureBit,jdbcType=BIGINT}, #{status,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="org.bulkframework.core.domain.typehandler.User" useGeneratedKeys="true" keyProperty="id">
     insert into t_user
@@ -53,8 +53,8 @@
       <if test="featureJson != null" >
         feature_json,
       </if>
-      <if test="featureNum != null" >
-        feature_num,
+      <if test="featureBit != null" >
+        feature_bit,
       </if>
       <if test="status != null" >
         status,
@@ -79,8 +79,8 @@
       <if test="featureJson != null" >
         #{featureJson,jdbcType=VARCHAR},
       </if>
-      <if test="featureNum != null" >
-        #{featureNum,jdbcType=BIGINT},
+      <if test="featureBit != null" >
+        #{featureBit,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
         #{status,jdbcType=TINYINT},
@@ -105,8 +105,8 @@
       <if test="featureJson != null" >
         feature_json = #{featureJson,jdbcType=VARCHAR},
       </if>
-      <if test="featureNum != null" >
-        feature_num = #{featureNum,jdbcType=BIGINT},
+      <if test="featureBit != null" >
+        feature_bit = #{featureBit,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=TINYINT},
@@ -121,7 +121,7 @@
       username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       feature_json = #{featureJson,jdbcType=VARCHAR},
-      feature_num = #{featureNum,jdbcType=BIGINT},
+      feature_bit = #{featureBit,jdbcType=BIGINT},
       status = #{status,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>

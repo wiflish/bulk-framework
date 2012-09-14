@@ -13,22 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.bulkframework.common.model;
+package org.bulkframework.core.dao;
 
-import java.io.Serializable;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 /**
  * 
- * 扩展字段接口，不用于where条件.
- * 
  * @author wiflish
- * @createTime 2012-9-5 下午5:39:40
+ * @since 2012-9-14
  */
-public interface FeatureJson extends Serializable {
-    /**
-     * 转换为JSON字串.
-     * 
-     * @return JSON字串.
-     */
-    public String toJSONString();
+@ContextConfiguration("classpath:/bulkCoreConfig/spring-bulkcore.xml")
+public abstract class AbstractBulkCoreSpringContextTest extends AbstractJUnit4SpringContextTests {
 }
