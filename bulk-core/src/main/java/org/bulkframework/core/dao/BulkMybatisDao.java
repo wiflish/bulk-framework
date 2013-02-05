@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.bulkframework.common.pagination.Pager;
 
 /**
- * Mybatis Dao
+ * Mybatis Dao implements
  * 
  * @author wiflish
  * @createTime 2012-6-9 下午9:43:49
@@ -64,6 +64,11 @@ public class BulkMybatisDao<T> implements BulkDao<T> {
     @Override
     public int remove(String sql, Map<String, Object> queryMap) {
         return sqlSessionTemplate.update(sql, queryMap);
+    }
+
+    @Override
+    public int queryCount(String sql) {
+        return queryCount(sql, new HashMap<String, Object>());
     }
 
     @Override
@@ -160,5 +165,16 @@ public class BulkMybatisDao<T> implements BulkDao<T> {
     @Override
     public T queryOne(String sql, T queryObject) {
         return sqlSessionTemplate.selectOne(sql, queryObject);
+    }
+
+    @Override
+    public Object queryObject(String sql, Map<String, Object> queryMap) {
+        return sqlSessionTemplate.selectOne(sql, queryMap);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <E> E queryObjectGeneric(String sql, Map<String, Object> queryMap) {
+        return (E) sqlSessionTemplate.selectOne(sql, queryMap);
     }
 }

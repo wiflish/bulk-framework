@@ -87,7 +87,18 @@ public interface BulkDao<T> {
     /**
      * 查询总记录数.
      * <p>
-     * select count(*) from table_a where queryMap.key=#{queryMap.value} and ...
+     * select count(id) from table_a
+     * </p>
+     * 
+     * @param sql 实际的sql语句或者能映射到实际的sql语句.
+     * @return 返回总记录数
+     */
+    public int queryCount(String sql);
+
+    /**
+     * 查询总记录数.
+     * <p>
+     * select count(id) from table_a where queryMap.key=#{queryMap.value} and ...
      * </p>
      * 
      * @param sql 实际的sql语句或者能映射到实际的sql语句.
@@ -197,4 +208,28 @@ public interface BulkDao<T> {
      * @return 返回符合条件的记录
      */
     public T queryOne(String sql, T queryObject);
+
+    /**
+     * 根据查询条件返回单条记录（不映射到POJO），一般用于查询某个字段值。
+     * <p>
+     * select num from table_a where queryMap.key=#{queryMap.value} and ...
+     * </p>
+     * 
+     * @param sql
+     * @param queryMap
+     * @return 返回结果由具体业务自行强制转换
+     */
+    public Object queryObject(String sql, Map<String, Object> queryMap);
+
+    /**
+     * 根据查询条件返回单条记录（不映射到POJO的查询），一般用于查询某个字段值或者一些groupBy。
+     * <p>
+     * select num from table_a where queryMap.key=#{queryMap.value} and ...
+     * </p>
+     * 
+     * @param sql
+     * @param queryMap
+     * @return 返回范型结果
+     */
+    public <E> E queryObjectGeneric(String sql, Map<String, Object> queryMap);
 }
