@@ -17,18 +17,60 @@ package org.bulkframework.common.model;
 
 import java.io.Serializable;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 
- * 扩展字段接口，不用于where条件.
+ * 扩展字段，不用于where条件.
  * 
  * @author wiflish
  * @createTime 2012-9-5 下午5:39:40
  */
-public interface FeatureJson extends Serializable {
+public class FeatureJson implements Serializable {
+    private static final long serialVersionUID = 7276217004810051310L;
+    private String value;
+
+    public FeatureJson() {
+    }
+
+    public FeatureJson(String value) {
+        this.value = value;
+    }
+
+    public <T> FeatureJson(T obj) {
+        if (obj == null) {
+            return;
+        }
+        this.value = JSON.toJSONString(obj);
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public <T> void setValue(T obj) {
+        if (obj == null) {
+            return;
+        }
+        this.value = JSON.toJSONString(obj);
+    }
+
     /**
-     * 转换为JSON字串.
+     * 将json结构字符串解析为Java对象。
      * 
-     * @return JSON字串.
+     * @param clazz
+     * @return 返回java对象。如果解析出现异常，返回<span class="code">NULL</span>
      */
-    public String toJSONString();
+    public <T> T toJavaObject(Class<T> clazz) {
+        try {
+            T result = JSON.parseObject(value, clazz);
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

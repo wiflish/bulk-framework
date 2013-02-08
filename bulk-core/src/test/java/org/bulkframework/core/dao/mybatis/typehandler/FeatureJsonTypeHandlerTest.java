@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.Calendar;
 
+import org.bulkframework.common.model.FeatureJson;
 import org.bulkframework.core.dao.AbstractBulkCoreSpringContextTest;
 import org.bulkframework.core.dao.BulkDao;
 import org.bulkframework.core.domain.typehandler.User;
@@ -16,7 +17,7 @@ public class FeatureJsonTypeHandlerTest extends AbstractBulkCoreSpringContextTes
     private BulkDao<User> userDao;
 
     @Test
-    public void test() {
+    public void testFeatureJsonTypeHandler() {
         User user = new User();
 
         user.setUsername("test11");
@@ -29,7 +30,7 @@ public class FeatureJsonTypeHandlerTest extends AbstractBulkCoreSpringContextTes
         json.setName("xiezr");
         json.setBirthday(Calendar.getInstance());
 
-        user.setFeatureJson(json);
+        user.setFeatureJson(new FeatureJson(json));
 
         user = userDao.insertAndReturnId("typehandler.UserMapper.insertSelective", user);
 
@@ -37,11 +38,40 @@ public class FeatureJsonTypeHandlerTest extends AbstractBulkCoreSpringContextTes
         assertTrue(id != null && id > 0);
 
         user = userDao.queryOne("typehandler.UserMapper.selectByPrimaryKey", id);
-        UserFeatureJson s = user.getFeatureJson();
+        FeatureJson s = user.getFeatureJson();
 
         assertTrue(user != null);
         assertTrue(s != null);
 
-        assertTrue(s.getAge() == 12);
+        UserFeatureJson dbUserFeature = s.toJavaObject(UserFeatureJson.class);
+        assertTrue(dbUserFeature.getAge() == 12);
+        assertTrue("xiezr".equals(dbUserFeature.getName()));
+
+        UserInner fieldNotFullMatch = s.toJavaObject(UserInner.class);
+
+        assertTrue(fieldNotFullMatch != null);
+        assertTrue("xiezr".equals(fieldNotFullMatch.getName()));
+        assertTrue(fieldNotFullMatch.getAddress() == null);
+    }
+
+    public class UserInner {
+        private String name;
+        private String address;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
     }
 }

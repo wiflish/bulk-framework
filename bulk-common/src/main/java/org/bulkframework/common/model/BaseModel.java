@@ -24,7 +24,7 @@ import java.util.Calendar;
  * @author wiflish
  * @createTime 2012-6-3 下午11:55:24
  */
-public abstract class BaseModel<F extends FeatureJson> implements Serializable {
+public abstract class BaseModel implements Serializable {
     private static final long serialVersionUID = 6742295437488171192L;
 
     /** 记录主键id */
@@ -42,8 +42,8 @@ public abstract class BaseModel<F extends FeatureJson> implements Serializable {
     /** 扩展字段，保存标识数据，按位操作，具体的位的业务含义由各个业务表自行定义. */
     protected FeatureBit featureBit;
 
-    /** 扩展字段，Json结构. 长度限制为255以内. */
-    private F featureJson;
+    /** 扩展字段，Json结构. 长度限制为1000以内. */
+    protected FeatureJson featureJson;
 
     public Integer getId() {
         return id;
@@ -85,11 +85,11 @@ public abstract class BaseModel<F extends FeatureJson> implements Serializable {
         this.featureBit = featureBit;
     }
 
-    public F getFeatureJson() {
+    public FeatureJson getFeatureJson() {
         return featureJson;
     }
 
-    public void setFeatureJson(F featureJson) {
+    public void setFeatureJson(FeatureJson featureJson) {
         this.featureJson = featureJson;
     }
 }

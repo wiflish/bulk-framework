@@ -1,15 +1,15 @@
 package org.bulkframework.core.domain.typehandler;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-import org.bulkframework.common.model.DefaultFeatureJson;
-
 /**
+ * 用户实体的featureJson扩展字段对象.
  * 
  * @author wiflish
  * @createTime 2012-7-26 下午6:01:11
  */
-public class UserFeatureJson extends DefaultFeatureJson {
+public class UserFeatureJson implements Serializable {
     private static final long serialVersionUID = 2120675112287254765L;
 
     private String name;

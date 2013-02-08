@@ -46,13 +46,13 @@ public class FeatureBit implements Serializable {
      * 检查featureBit是否在参数对应的字节全部已设置为1.
      * 
      * @param flagBit 待检查的标记值.
-     * @return 1=参数值对应的位都已设置为1. 否则返回0.
+     * @return 当且仅当参数值对应的位都已设置为1返回true, 否则返回false.
      */
-    public long getBits(long flagBit) {
+    public boolean getBits(long flagBit) {
         if (flagBit == 0) {
-            return 0;
+            return false;
         }
-        return ((value & flagBit) / flagBit);
+        return ((value & flagBit) == flagBit);
     }
 
     /**

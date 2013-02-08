@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<properties resource="jdbc.properties"/>
+
+	<!-- 2.指定数据库jar驱动的物理位置, 本地相关. -->
+	<classPathEntry
+		location="/home/wiflish/dev/repository/m2/repository/mysql/mysql-connector-java/5.1.15/mysql-connector-java-5.1.15.jar" />
+	<classPathEntry location="target/classes" />
+
+	<context id="BulkTables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="${bulk-testcase.jdbc.driverClassName}"
+			connectionURL="${bulk-testcase.jdbc.url}" userId="${bulk-testcase.jdbc.username}"
+			password="${bulk-testcase.jdbc.password}" />
+
+		<javaModelGenerator targetPackage="org.bulkframework.test.domain"
+			targetProject="MAVEN">
+			<property name="enableSubPackages" value="true" />
+			<property name="rootClass" value="org.bulkframework.common.model.BaseModel" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="mapper" targetProject="MAVEN">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="org.bulkframework.test.dao" targetProject="MAVEN">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="t_user" domainObjectName="User"
+			enableSelectByExample="false" enableDeleteByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false" />
+	</context>
+</generatorConfiguration>

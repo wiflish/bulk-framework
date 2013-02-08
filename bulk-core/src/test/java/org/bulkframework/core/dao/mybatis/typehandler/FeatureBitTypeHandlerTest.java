@@ -37,7 +37,7 @@ public class FeatureBitTypeHandlerTest extends AbstractBulkCoreSpringContextTest
     private BulkDao<User> userDao;
 
     @Test
-    public void test() {
+    public void testFeatureBitTypeHandler() {
         User user = new User();
 
         user.setUsername("test11");
@@ -58,8 +58,8 @@ public class FeatureBitTypeHandlerTest extends AbstractBulkCoreSpringContextTest
         user = userDao.queryOne("typehandler.UserMapper.selectByPrimaryKey", id);
 
         assertTrue(1023 == user.getFeatureBit().getValue());
-        assertTrue(user.getFeatureBit().getBits(123) == 1);
-        assertTrue(user.getFeatureBit().getBits(12) == 1);
-        assertTrue(user.getFeatureBit().getBits(1000) == 1);
+        assertTrue(user.getFeatureBit().getBits(123));
+        assertTrue(user.getFeatureBit().getBits(12));
+        assertTrue(user.getFeatureBit().getBits(1000));
     }
 }
