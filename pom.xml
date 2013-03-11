@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.bulkframework</groupId>
+	<artifactId>bulkframework</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>bulkframework</name>
+	<url>http://www.wiflish.com</url>
+
+	<modules>
+		<module>bulk-util</module>
+		<module>bulk-core</module>
+		<module>bulk-webcore</module>
+		<module>bulk-common</module>
+		<module>bulk-admin</module>
+		<module>bulk-web</module>
+		<module>bulk-test</module>
+	</modules>
+</project>
