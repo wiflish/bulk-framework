@@ -28,7 +28,7 @@ public abstract class BaseModel implements Serializable {
     private static final long serialVersionUID = 6742295437488171192L;
 
     /** 记录主键id */
-    protected Integer id;
+    protected Long id;
 
     /** 记录状态， -1=已删除 */
     protected Byte status;
@@ -45,11 +45,11 @@ public abstract class BaseModel implements Serializable {
     /** 扩展字段，Json结构. 长度限制为1000以内. */
     protected FeatureJson featureJson;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

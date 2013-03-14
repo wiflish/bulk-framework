@@ -13,7 +13,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.6</jdk.version>
+        <jdk.version>1.7</jdk.version>
         <bulkframework.version>1.0.0-SNAPSHOT</bulkframework.version>
         <!-- spring -->
         <spring.version>3.1.1.RELEASE</spring.version>
@@ -49,6 +49,11 @@
             <dependency>
                 <groupId>org.bulkframework</groupId>
                 <artifactId>bulk-core</artifactId>
+                <version>${bulkframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bulkframework</groupId>
+                <artifactId>bulk-webcore</artifactId>
                 <version>${bulkframework.version}</version>
             </dependency>
             <!-- spring begin. -->

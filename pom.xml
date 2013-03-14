@@ -18,6 +18,5 @@
 		<module>bulk-common</module>
 		<module>bulk-admin</module>
 		<module>bulk-web</module>
-		<module>bulk-test</module>
 	</modules>
 </project>

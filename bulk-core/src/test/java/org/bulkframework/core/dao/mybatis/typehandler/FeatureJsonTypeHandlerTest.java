@@ -1,6 +1,6 @@
 package org.bulkframework.core.dao.mybatis.typehandler;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 
@@ -34,7 +34,7 @@ public class FeatureJsonTypeHandlerTest extends AbstractBulkCoreSpringContextTes
 
         user = userDao.insertAndReturnId("typehandler.UserMapper.insertSelective", user);
 
-        Integer id = user.getId();
+        Long id = user.getId();
         assertTrue(id != null && id > 0);
 
         user = userDao.queryOne("typehandler.UserMapper.selectByPrimaryKey", id);
