@@ -1,11 +1,13 @@
 package org.bulkframework.core.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.bulkframework.common.model.BaseModel;
 import org.bulkframework.common.pagination.Pager;
 
 /**
@@ -32,22 +34,49 @@ public class BulkMybatisDao<T> implements BulkDao<T> {
 
     @Override
     public T insertAndReturnId(String sql, T model) {
+        if (model instanceof BaseModel) {
+            Calendar today = Calendar.getInstance();
+            if (((BaseModel) model).getCreateTime() == null) {
+                ((BaseModel) model).setCreateTime(today);
+            }
+            if (((BaseModel) model).getUpdateTime() == null) {
+                ((BaseModel) model).setUpdateTime(today);
+            }
+        }
         sqlSessionTemplate.insert(sql, model);
         return model;
     }
 
     @Override
     public int insertAndReturnAffectedCount(String sql, T model) {
+        if (model instanceof BaseModel) {
+            Calendar today = Calendar.getInstance();
+            if (((BaseModel) model).getCreateTime() == null) {
+                ((BaseModel) model).setCreateTime(today);
+            }
+            if (((BaseModel) model).getUpdateTime() == null) {
+                ((BaseModel) model).setUpdateTime(today);
+            }
+        }
         return sqlSessionTemplate.insert(sql, model);
     }
 
     @Override
     public int update(String sql, T model) {
+        if (model instanceof BaseModel) {
+            if (((BaseModel) model).getUpdateTime() == null) {
+                ((BaseModel) model).setUpdateTime(Calendar.getInstance());
+            }
+        }
         return sqlSessionTemplate.update(sql, model);
     }
 
     @Override
     public int updateByMap(String sql, Map<String, Object> paramMap) {
+        Object updateTime = paramMap.get("updateTime");
+        if (updateTime == null) {
+            paramMap.put("updateTime", Calendar.getInstance());
+        }
         return sqlSessionTemplate.update(sql, paramMap);
     }
 
