@@ -16,7 +16,11 @@ public abstract class BaseManagerImpl<T extends BaseModel> implements BaseManage
     @Override
     public long insert(T model) {
         Assert.notNull(model, "参数不能为NULL.");
-        Assert.isNull(model.getId(), "新增记录,id必须为NULL.");
+
+        Long id = model.getId();
+        if (id != null && id > 0) {
+            model.setId(null);
+        }
 
         getDao().insertAndReturnId(getMapper() + ".insertSelective", model);
         return model.getId();
