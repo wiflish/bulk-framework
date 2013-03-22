@@ -34,6 +34,7 @@
         <servlet-api.version>3.0.1</servlet-api.version>
         <jsp-api.version>2.2</jsp-api.version>
         <jstl.version>1.1.2</jstl.version>
+        <kaptcha.version>0.0.6</kaptcha.version>
     </properties>
 
     <dependencyManagement>
@@ -216,6 +217,11 @@
                 <artifactId>jsp-api</artifactId>
                 <version>${jsp-api.version}</version>
                 <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.axet</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
