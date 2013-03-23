@@ -29,7 +29,6 @@ public abstract class BaseManagerImpl<T extends BaseModel> implements BaseManage
     @Override
     public int update(T model) {
         Assert.notNull(model, "参数不能为NULL.");
-        Assert.notNull(model.getId(), "更新记录,id不能为NULL.");
 
         return getDao().update(getMapper() + ".updateByPrimaryKeySelective", model);
     }
