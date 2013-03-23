@@ -22,6 +22,10 @@ public class ParamMap {
         paramMap.put(key, value);
         return this;
     }
+    
+    public static ParamMap build() {
+        return new ParamMap();
+    }
 
     public Map<String, Object> toMap() {
         return paramMap;
