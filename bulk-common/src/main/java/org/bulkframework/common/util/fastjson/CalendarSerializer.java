@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Calendar;
 
-import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.bulkframework.common.Constants;
 
 import com.alibaba.fastjson.serializer.JSONSerializer;
@@ -12,7 +12,7 @@ import com.alibaba.fastjson.serializer.ObjectSerializer;
 
 public class CalendarSerializer implements ObjectSerializer {
     // 日期格式化参数.
-    private String pattern;
+    private final String pattern;
 
     public CalendarSerializer() {
         this.pattern = Constants.DATETIME_FORMAT;
