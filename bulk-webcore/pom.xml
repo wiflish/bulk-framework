@@ -21,8 +21,20 @@
             <artifactId>junit</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.bulkframework</groupId>
+            <artifactId>bulk-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.bulkframework</groupId>
+            <artifactId>bulk-common</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
