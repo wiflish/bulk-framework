@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class DateUtil {
     /**
-     * 将从数据库中取出的默认值1970-01-01日期字段转换为NULL.
+     * 将从数据库中取出的默认值1970-01-01日期字段转换为NULL. Date类型.
      * 
      * @param value
      * @return
@@ -28,12 +28,36 @@ public class DateUtil {
 
         cal.setTime(value);
 
-        int year = cal.get(Calendar.YEAR), month = cal.get(Calendar.MONTH), day = cal.get(Calendar.DAY_OF_MONTH);
+        boolean result = isDate19700101(cal);
 
-        if (year == 1970 && month == 0 && day == 1) {
+        return (result ? null : value);
+    }
+
+    /**
+     * 将从数据库中取出的默认值1970-01-01日期字段转换为NULL. Calendar类型
+     * 
+     * @param value
+     * @return
+     */
+    public static Calendar convert19700101toNull(Calendar value) {
+        if (value == null) {
             return null;
         }
 
-        return value;
+        boolean result = isDate19700101(value);
+
+        return (result ? null : value);
+    }
+
+    /**
+     * @param value
+     */
+    private static boolean isDate19700101(Calendar value) {
+        int year = value.get(Calendar.YEAR), month = value.get(Calendar.MONTH), day = value.get(Calendar.DAY_OF_MONTH);
+
+        if (year == 1970 && month == 0 && day == 1) {
+            return true;
+        }
+        return false;
     }
 }
