@@ -12,10 +12,11 @@
 	<url>http://www.wiflish.com</url>
 
 	<modules>
-		<module>bulk-util</module>
+        <module>bulk-parent</module>
+		<module>bulk-common</module>
 		<module>bulk-core</module>
 		<module>bulk-webcore</module>
-		<module>bulk-common</module>
+		<module>bulk-util</module>
 		<module>bulk-admin</module>
 		<module>bulk-web</module>
 	</modules>
