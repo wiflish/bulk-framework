@@ -17,7 +17,5 @@
 		<module>bulk-core</module>
 		<module>bulk-webcore</module>
 		<module>bulk-util</module>
-		<module>bulk-admin</module>
-		<module>bulk-web</module>
 	</modules>
 </project>
