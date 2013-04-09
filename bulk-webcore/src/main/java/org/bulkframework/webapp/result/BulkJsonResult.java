@@ -60,6 +60,22 @@ public class BulkJsonResult<T> implements Serializable {
         this.model = model;
     }
 
+    public static <T> BulkJsonResult<T> failure(int code, String message) {
+        return new BulkJsonResult<T>(false, code, message);
+    }
+
+    public static <T> BulkJsonResult<T> success() {
+        return new BulkJsonResult<T>();
+    }
+
+    public static <T> BulkJsonResult<T> success(String message) {
+        return new BulkJsonResult<T>(message);
+    }
+
+    public static <T> BulkJsonResult<T> success(int code, String message) {
+        return new BulkJsonResult<T>(code, message);
+    }
+
     /**
      * @return the code
      */
