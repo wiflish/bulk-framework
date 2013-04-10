@@ -25,9 +25,9 @@ public class SpringMvcFileUploadContext implements FileUploadContext<MultipartFi
     }
 
     @Override
-    public void setUploadFileNameStrategy(FileUploadNameStrategy<MultipartFile> uploadFileNameStrategy)
+    public void setFileUploadNameStrategy(FileUploadNameStrategy<MultipartFile> fileUploadNameStrategy)
             throws FileUploadException {
-        this.fileUploadNameStrategy = uploadFileNameStrategy;
+        this.fileUploadNameStrategy = fileUploadNameStrategy;
     }
 
     @Override

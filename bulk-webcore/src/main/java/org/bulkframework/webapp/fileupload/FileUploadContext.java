@@ -20,14 +20,15 @@ public interface FileUploadContext<T> {
     /**
      * 注入命名策略.
      * 
-     * @param uploadFileNameStrategy
+     * @param fileUploadNameStrategy
      */
-    void setUploadFileNameStrategy(FileUploadNameStrategy<T> uploadFileNameStrategy);
+    void setFileUploadNameStrategy(FileUploadNameStrategy<T> fileUploadNameStrategy);
 
     /**
      * 文件上传.（使用初始化注入的文件命名策略）
      * 
-     * @param multiPartFile web上传的文件对象，比如spring-mvc的<a href=
+     * @param multiPartFile
+     *            web上传的文件对象，比如spring-mvc的<a href=
      *            "http://static.springsource.org/spring/docs/3.1.x/javadoc-api/index.html?org/springframework/web/multipart/MultipartFile.html"
      *            >org.springframework.web.multipart.MultipartFile</a>接口
      * @return 返回上传处理后的文件名(包含文件相对路径).
@@ -37,10 +38,12 @@ public interface FileUploadContext<T> {
     /**
      * 上传文件，上传后的文件名根据指定的文件命名策略。
      * 
-     * @param multiPartFile web上传的文件对象，比如spring-mvc的<a href=
+     * @param multiPartFile
+     *            web上传的文件对象，比如spring-mvc的<a href=
      *            "http://static.springsource.org/spring/docs/3.1.x/javadoc-api/index.html?org/springframework/web/multipart/MultipartFile.html"
      *            >org.springframework.web.multipart.MultipartFile</a>接口
-     * @param strategy 命名策略
+     * @param strategy
+     *            命名策略
      * @return
      */
     String upload(T multiPartFile, FileUploadNameStrategy<T> strategy) throws FileUploadException;
