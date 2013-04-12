@@ -7,7 +7,6 @@ import java.util.Calendar;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 基于上传时间的命名策略-采用spring mvc上传组件.
@@ -15,21 +14,21 @@ import org.springframework.web.multipart.MultipartFile;
  * @author wiflish
  * @since Apr 8, 2013
  */
-public class SpringMvcDayFileUploadNameStrategy implements FileUploadNameStrategy<MultipartFile> {
+public class SpringMvcDayFileUploadNameStrategy implements FileUploadNameStrategy<FileUploadOption> {
 
     @Override
-    public String getTransFileName(MultipartFile multiPartFile) {
-        Validate.notNull(multiPartFile, "参数不能为NULL");
+    public String getTransFileName(FileUploadOption fileUploadOption) {
+        Validate.notNull(fileUploadOption, "参数不能为NULL");
 
-        String originalFileName = multiPartFile.getOriginalFilename();
+        String originalFileName = fileUploadOption.getMultipartFile().getOriginalFilename();
         String originalExt = originalFileName.substring(originalFileName.lastIndexOf("."), originalFileName.length());
 
         return (System.nanoTime() + originalExt);
     }
 
     @Override
-    public String getTransFileRelativePath(MultipartFile multiPartFile) {
-        Validate.notNull(multiPartFile, "参数不能为NULL");
+    public String getTransFileRelativePath(FileUploadOption fileUploadOption) {
+        Validate.notNull(fileUploadOption, "参数不能为NULL");
 
         return DateFormatUtils.format(Calendar.getInstance(), "yyyyMMdd");
     }

@@ -6,6 +6,8 @@ package org.bulkframework.webapp.fileupload;
 /**
  * 文件上传处理接口.
  * 
+ * 访问已上传的文件时，可以使用应用服务器的虚拟目录功能.
+ * 
  * @author wiflish
  * @since Apr 8, 2013
  */
@@ -27,24 +29,24 @@ public interface FileUploadContext<T> {
     /**
      * 文件上传.（使用初始化注入的文件命名策略）
      * 
-     * @param multiPartFile
-     *            web上传的文件对象，比如spring-mvc的<a href=
-     *            "http://static.springsource.org/spring/docs/3.1.x/javadoc-api/index.html?org/springframework/web/multipart/MultipartFile.html"
-     *            >org.springframework.web.multipart.MultipartFile</a>接口
+     * @param fileUploadOption {@link FileUploadOption}
      * @return 返回上传处理后的文件名(包含文件相对路径).
      */
-    String upload(T multiPartFile) throws FileUploadException;
+    String upload(T fileUploadOption) throws FileUploadException;
 
     /**
      * 上传文件，上传后的文件名根据指定的文件命名策略。
      * 
-     * @param multiPartFile
-     *            web上传的文件对象，比如spring-mvc的<a href=
-     *            "http://static.springsource.org/spring/docs/3.1.x/javadoc-api/index.html?org/springframework/web/multipart/MultipartFile.html"
-     *            >org.springframework.web.multipart.MultipartFile</a>接口
-     * @param strategy
-     *            命名策略
+     * @param fileUploadOption {@link FileUploadOption}
+     * @param strategy 命名策略
      * @return
      */
-    String upload(T multiPartFile, FileUploadNameStrategy<T> strategy) throws FileUploadException;
+    String upload(T fileUploadOption, FileUploadNameStrategy<T> strategy) throws FileUploadException;
+
+    /**
+     * 删除已上传的文件.
+     * 
+     * @param fileUploadOption
+     */
+    void delete(T fileUploadOption);
 }

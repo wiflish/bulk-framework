@@ -15,4 +15,5 @@ public interface Constants extends Serializable {
     public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String DATETIME_FORMAT_CN = "yyyy年MM月dd日 HH时mm分ss秒";
     public static final String DATETIME_FORMAT_SHORT = "yyyyMMddHHmmss";
+    public static final String FILE_SEPARATE = "/";
 }
