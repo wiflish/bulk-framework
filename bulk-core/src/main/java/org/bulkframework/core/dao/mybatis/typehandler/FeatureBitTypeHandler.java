@@ -36,6 +36,7 @@ import org.bulkframework.common.model.FeatureBit;
 @MappedTypes({ FeatureBit.class })
 @MappedJdbcTypes({ JdbcType.BIGINT })
 public class FeatureBitTypeHandler extends BaseTypeHandler<FeatureBit> {
+    private static final long defaultValue = 0L;
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, FeatureBit parameter, JdbcType jdbcType) throws SQLException {
@@ -45,21 +46,27 @@ public class FeatureBitTypeHandler extends BaseTypeHandler<FeatureBit> {
     @Override
     public FeatureBit getNullableResult(ResultSet rs, String columnName) throws SQLException {
         long featureBit = rs.getLong(columnName);
-
+        if (defaultValue == featureBit) {
+            return null;
+        }
         return new FeatureBit(featureBit);
     }
 
     @Override
     public FeatureBit getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         long featureBit = rs.getLong(columnIndex);
-
+        if (defaultValue == featureBit) {
+            return null;
+        }
         return new FeatureBit(featureBit);
     }
 
     @Override
     public FeatureBit getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         long featureBit = cs.getLong(columnIndex);
-
+        if (defaultValue == featureBit) {
+            return null;
+        }
         return new FeatureBit(featureBit);
     }
 }

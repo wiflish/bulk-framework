@@ -34,6 +34,7 @@ import org.bulkframework.common.model.FeatureJson;
 @MappedTypes({ FeatureJson.class })
 @MappedJdbcTypes({ JdbcType.VARCHAR })
 public class FeatureJsonTypeHandler extends BaseTypeHandler<FeatureJson> {
+    private static final String defaultValue = "{}";
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, FeatureJson parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter.getValue());
@@ -42,18 +43,27 @@ public class FeatureJsonTypeHandler extends BaseTypeHandler<FeatureJson> {
     @Override
     public FeatureJson getNullableResult(ResultSet rs, String columnName) throws SQLException {
         String json = rs.getString(columnName);
+        if (defaultValue.equals(json)) {
+            return null;
+        }
         return new FeatureJson(json);
     }
 
     @Override
     public FeatureJson getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         String json = rs.getString(columnIndex);
+        if (defaultValue.equals(json)) {
+            return null;
+        }
         return new FeatureJson(json);
     }
 
     @Override
     public FeatureJson getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         String json = cs.getString(columnIndex);
+        if (defaultValue.equals(json)) {
+            return null;
+        }
         return new FeatureJson(json);
     }
 }
