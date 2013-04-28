@@ -42,7 +42,7 @@ public class Pager<T> implements Serializable {
      * @return
      */
     public int getEndIndex() {
-        return pageNo * pageNo;
+        return pageNo * pageSize;
     }
 
     /**
