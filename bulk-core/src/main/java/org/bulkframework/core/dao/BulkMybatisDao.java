@@ -206,4 +206,9 @@ public class BulkMybatisDao<T> implements BulkDao<T> {
     public <E> E queryObjectGeneric(String sql, Map<String, Object> queryMap) {
         return (E) sqlSessionTemplate.selectOne(sql, queryMap);
     }
+
+    @Override
+    public List<Map<String, Object>> queryMapList(String sql, Map<String, Object> queryMap) {
+        return sqlSessionTemplate.selectList(sql, queryMap);
+    }
 }

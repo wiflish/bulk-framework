@@ -232,4 +232,16 @@ public interface BulkDao<T> {
      * @return 返回范型结果
      */
     public <E> E queryObjectGeneric(String sql, Map<String, Object> queryMap);
+
+    /**
+     * 根据查询条件返回多条记录（不映射到POJO的查询），一般用于groupBy等映射为Map对象的sql。
+     * <p>
+     * select num from table_a where queryMap.key=#{queryMap.value} and ...
+     * </p>
+     * 
+     * @param sql
+     * @param queryMap
+     * @return
+     */
+    public List<Map<String, Object>> queryMapList(String sql, Map<String, Object> queryMap);
 }
