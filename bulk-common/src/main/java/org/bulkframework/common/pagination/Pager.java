@@ -17,14 +17,29 @@ public class Pager<T> implements Serializable {
     private int pageSize = 20;
     /** 当前页, 默认第一页 */
     private int pageNo = 1;
+    
+    /**
+     * 当前页数据.
+     */
     private List<T> pageData;
+    
+    /**
+     * 是否需要查询总记录数.
+     */
+    private boolean needTotalCount = true;
 
     public Pager() {
     }
 
     public Pager(int pageNo, int pageSize) {
-        this.pageNo = pageNo;
-        this.pageSize = pageSize;
+        this.pageNo = (pageNo <= 0 ? 1 : pageNo);
+        this.pageSize = (pageSize <= 0 ? 20 : pageSize);
+    }
+
+    public Pager(int pageNo, int pageSize, boolean needTotalCount) {
+        this.pageNo = (pageNo <= 0 ? 1 : pageNo);
+        this.pageSize = (pageSize <= 0 ? 20 : pageSize);
+        this.needTotalCount = needTotalCount;
     }
 
     /**
@@ -70,7 +85,7 @@ public class Pager<T> implements Serializable {
     }
 
     public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize = (pageSize <= 0 ? 20 : pageSize);
     }
 
     public int getPageNo() {
@@ -78,7 +93,7 @@ public class Pager<T> implements Serializable {
     }
 
     public void setPageNo(int pageNo) {
-        this.pageNo = pageNo;
+        this.pageNo = (pageNo <= 0 ? 1 : pageNo);
     }
 
     public List<T> getPageData() {
@@ -87,5 +102,13 @@ public class Pager<T> implements Serializable {
 
     public void setPageData(List<T> pageData) {
         this.pageData = pageData;
+    }
+
+    public boolean isNeedTotalCount() {
+        return needTotalCount;
+    }
+
+    public void setNeedTotalCount(boolean needTotalCount) {
+        this.needTotalCount = needTotalCount;
     }
 }
