@@ -235,6 +235,7 @@
                 <artifactId>kaptcha</artifactId>
                 <version>${kaptcha.version}</version>
             </dependency>
+            <!-- tools end. -->
         </dependencies>
     </dependencyManagement>
 

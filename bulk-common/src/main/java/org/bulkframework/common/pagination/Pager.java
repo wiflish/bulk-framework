@@ -17,7 +17,7 @@ public class Pager<T> implements Serializable {
     private int pageSize = 20;
     /** 当前页, 默认第一页 */
     private int pageNo = 1;
-    
+
     /**
      * 当前页数据.
      */
