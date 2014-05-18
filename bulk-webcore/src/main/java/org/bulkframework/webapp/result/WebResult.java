@@ -8,72 +8,72 @@ import java.io.Serializable;
 import com.alibaba.fastjson.JSON;
 
 /**
- * 请求返回结果为JSON对象封装.
+ * web前端请求返回结果封装.
  * 
  * @author wiflish
  * @since Mar 20, 2013
  */
-public class BulkJsonResult<T> implements Serializable {
+public class WebResult<T> implements Serializable {
     private static final long serialVersionUID = -6585494936971138568L;
     private int code = 200; // 消息code.
     private boolean success = true; // 默认消息成功.
     private T model; // 需要带回的数据结构.
     private String message = "操作成功"; // 返回消息.
 
-    public BulkJsonResult() {
+    public WebResult() {
     }
 
-    public BulkJsonResult(String message) {
+    public WebResult(String message) {
         this.message = message;
     }
 
-    public BulkJsonResult(int code, String message) {
+    public WebResult(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public BulkJsonResult(boolean success, int code, String message) {
+    public WebResult(boolean success, int code, String message) {
         this.success = success;
         this.code = code;
         this.message = message;
     }
 
-    public BulkJsonResult(String message, T model) {
+    public WebResult(String message, T model) {
         this.message = message;
         this.model = model;
     }
 
-    public BulkJsonResult(T model) {
+    public WebResult(T model) {
         this.model = model;
     }
 
-    public BulkJsonResult(int code, String message, T model) {
+    public WebResult(int code, String message, T model) {
         this.code = code;
         this.message = message;
         this.model = model;
     }
 
-    public BulkJsonResult(boolean success, int code, String message, T model) {
+    public WebResult(boolean success, int code, String message, T model) {
         this.success = success;
         this.code = code;
         this.message = message;
         this.model = model;
     }
 
-    public static <T> BulkJsonResult<T> failure(int code, String message) {
-        return new BulkJsonResult<T>(false, code, message);
+    public static <T> WebResult<T> failure(int code, String message) {
+        return new WebResult<T>(false, code, message);
     }
 
-    public static <T> BulkJsonResult<T> success() {
-        return new BulkJsonResult<T>();
+    public static <T> WebResult<T> success() {
+        return new WebResult<T>();
     }
 
-    public static <T> BulkJsonResult<T> success(String message) {
-        return new BulkJsonResult<T>(message);
+    public static <T> WebResult<T> success(String message) {
+        return new WebResult<T>(message);
     }
 
-    public static <T> BulkJsonResult<T> success(int code, String message) {
-        return new BulkJsonResult<T>(code, message);
+    public static <T> WebResult<T> success(int code, String message) {
+        return new WebResult<T>(code, message);
     }
 
     /**
