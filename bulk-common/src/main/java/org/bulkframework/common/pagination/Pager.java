@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 分页处理类.
- * 
+ *
  * @author wiflish
  * @createTime 2012-5-31 下午5:07:00
  */
@@ -13,16 +13,20 @@ public class Pager<T> implements Serializable {
     private static final long serialVersionUID = -7813513436632328774L;
 
     private int totalCount;
-    /** 页大小,默认20条记录. */
+    /**
+     * 页大小,默认20条记录.
+     */
     private int pageSize = 20;
-    /** 当前页, 默认第一页 */
+    /**
+     * 当前页, 默认第一页
+     */
     private int pageNo = 1;
 
     /**
      * 当前页数据.
      */
     private List<T> pageData;
-    
+
     /**
      * 是否需要查询总记录数.
      */
@@ -44,7 +48,7 @@ public class Pager<T> implements Serializable {
 
     /**
      * 获取当前页的记录开始索引.
-     * 
+     *
      * @return
      */
     public int getStartIndex() {
@@ -53,7 +57,7 @@ public class Pager<T> implements Serializable {
 
     /**
      * 获取当前页的记录结尾索引.
-     * 
+     *
      * @return
      */
     public int getEndIndex() {
@@ -62,7 +66,7 @@ public class Pager<T> implements Serializable {
 
     /**
      * 计算总页数.
-     * 
+     *
      * @return
      */
     public int getPageCount() {
